@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col s12 l6 offset-l3">
+    <h1 class="main-title divider-heading teal-text text-darken-4"><span>Add a New Burger</span></h1>
+    <div class="card-panel card-add-burger">
+        <form action="/" method="POST">
+          <input type="text" name="burger" class="cyan lighten-5" required>
+          <button type="submit" class="waves-effect waves-light btn cyan darken-1">Add Burger</button>
+        </form>
+    </div><!--/.card-panel -->
+  </div><!--/.col -->
+</div><!--/.row --> 
+
+<div class="row">
+  <div class="col s12 l6">
+    <h1 class="divider-heading teal-text text-darken-4"><span>Burgers</span></h1>
+    {{#each burger}} 
+      {{#unless this.devoured}}
+        <div class="card-panel card-burger">
+          <span class="black-text">
+            <form action="/?_method=PUT" method="POST">
+              <input type="hidden" name="id" value="{{id}}">
+              <input type="hidden" name="devoured" value="1">
+              <button type="submit" class="waves-effect waves-light btn cyan darken-1">Devour</button>
+            </form>
+            {{burger_name}}
+          </span><!--/.blac-text -->
+        </div><!--/.card-panel -->  
+      {{/unless}} 
+    {{/each}}
+  </div><!--/.col -->
+
+  <div class="col s12 l6">
+    <h1 class="divider-heading teal-text text-darken-4"><span>Burgers Devoured</span></h1>
+    {{#each burger}} 
+      {{#if this.devoured}}
+        <div class="card-panel card-burger">
+          <span class="black-text">
+            {{burger_name}}
+          </span><!--/.blac-text -->
+        </div><!--/.card-panel -->  
+      {{/if}}
+    {{/each}}
+  </div><!--/.col -->
+</div><!--/.row -->

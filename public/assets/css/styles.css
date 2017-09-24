@@ -1,0 +1,58 @@
+html {
+  min-height: 100%;
+}
+body {
+  background: #63BBD1 url('../img/burger-3.jpg') no-repeat center bottom;
+  background-size: contain;
+  padding-top: 15px;
+}
+@media only screen and (min-width: 1200px) {
+  .container {
+    width: 60%;
+  }
+}
+.divider-heading {
+  font-size: 20px;
+  text-transform: uppercase;
+  text-align: center;
+	overflow: hidden;
+}
+.divider-heading span {
+	display: inline-block;
+	position: relative;
+  padding: 10px;
+  background-color: rgba(255,255,255,.95);
+}
+.divider-heading span:before,
+.divider-heading span:after {
+	content: '';
+  position: absolute;
+  top: 50%;
+	width:1140px;
+	border-top: solid 1px #fff;
+}
+.divider-heading span:before {
+  left: 100%;
+}
+.divider-heading span:after {
+  right: 100%;
+}
+.card-panel {
+  background-color: rgba(255,255,255,.95);;
+}
+.card-burger .btn {
+  height: 30px;
+  line-height: 30px;
+}
+@media only screen and (min-width: 600px) {
+  .card-burger .btn {
+    float: right;
+  }
+}
+.card-add-burger input[type=text]:not(.browser-default) {
+  margin-bottom: 10px;
+}
+.card-add-burger .btn {
+  display: block;
+  width: 100%;
+}
