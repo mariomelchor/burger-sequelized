@@ -5,6 +5,14 @@ var exphbs = require('express-handlebars');
 var routes = require('./controllers/burgers_controllers.js');
 var app = express();
 var port = process.env.PORT || 3000;
+var db = require('./models');
+
+db.sequelize.sync().then(function(){
+  // Initiate the listener.
+  app.listen(port, function(){
+    console.log('Listening on port %s ', port);
+  });
+})
 
 // Parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -18,5 +26,3 @@ app.set('view engine', 'handlebars');
 app.use('/', routes);
 app.use(express.static('./public'));
 
-// Initiate the listener.
-app.listen(port);
