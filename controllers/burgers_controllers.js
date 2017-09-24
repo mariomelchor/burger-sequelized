@@ -1,31 +1,38 @@
-var express = require('express');
-var burger = require('../models/burger.js');
-var router = express.Router();
+var db = require('../models');
 
-// Get Route
-router.get('/', function (req, res) {
-  burger.all(function(data) {
-    var obj = {
-      burger: data
-    };
-
-    res.render("index", obj);
+module.exports = function(app) {
+  // Get Route
+  app.get('/', function (req, res) {
+    db.Burger.findAll({}).then(function(result) {
+      var obj = {
+        burger: result
+      };
+      res.render('index', obj);
+    });
   });
-});
 
-// Post Route
-router.post('/', function(req, res) {
-  burger.create('burger_name', [req.body.burger], function() {
-    res.redirect("/");
+  // Post Route
+  app.post('/', function(req, res) {
+    db.Burger.create({
+      burger_name: req.body.burger,
+      devoured: 0
+    }).then(function(burger) {
+      res.redirect("/");
+    });
   });
-});
 
-// Update route
-router.put("/", function(req, res) {
-  var condition = "id = " + req.body.id;
-  burger.update( { devoured: req.body.devoured }, condition, function() {
-    res.redirect("/");
+  // Update route
+  app.put("/", function(req, res) {
+    db.Burger.update({
+      devoured: req.body.devoured
+    }, {
+      where: {
+        id: {
+          $eq: req.body.id
+        }
+      }
+    }).then(function(burger) {
+      res.redirect("/");
+    });
   });
-});
-
-module.exports = router;
+};
