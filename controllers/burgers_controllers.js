@@ -3,7 +3,9 @@ var db = require('../models');
 module.exports = function(app) {
   // Get Route
   app.get('/', function (req, res) {
-    db.Burger.findAll({}).then(function(result) {
+    db.Burger.findAll({ 
+      order: [['burger_name', 'ASC']] 
+    }).then(function(result) {
       var obj = {
         burger: result
       };
@@ -14,8 +16,7 @@ module.exports = function(app) {
   // Post Route
   app.post('/', function(req, res) {
     db.Burger.create({
-      burger_name: req.body.burger,
-      devoured: 0
+      burger_name: req.body.burger
     }).then(function(burger) {
       res.redirect("/");
     });
