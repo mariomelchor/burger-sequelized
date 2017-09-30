@@ -8,10 +8,3 @@ module.exports = function(sequelize, DataTypes){
   });
   return Burger;
 }
-// Sample Validation
-// burger_name: {
-//   type: DataTypes.STRING,
-//   validate: {
-//     notEmpty: true,
-//   }
-// },
