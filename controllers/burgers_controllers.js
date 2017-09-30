@@ -4,7 +4,8 @@ module.exports = function(app) {
   // Get Route
   app.get('/', function (req, res) {
     db.Burger.findAll({ 
-      order: [['burger_name', 'ASC']] 
+      order: [['burger_name', 'ASC']],
+      include: [db.Customer]
     }).then(function(result) {
       var obj = {
         burger: result
@@ -24,13 +25,17 @@ module.exports = function(app) {
 
   // Update route
   app.put("/", function(req, res) {
+
+    db.Customer.create({
+      customer_name: req.body.customer_name,
+      BurgerId: req.body.id
+    });
+
     db.Burger.update({
       devoured: req.body.devoured
     }, {
       where: {
-        id: {
-          $eq: req.body.id
-        }
+        id: req.body.id
       }
     }).then(function(burger) {
       res.redirect("/");

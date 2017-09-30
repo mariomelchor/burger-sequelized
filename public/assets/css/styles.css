@@ -56,3 +56,6 @@ body {
   display: block;
   width: 100%;
 }
+.float-right {
+  float: right;
+}

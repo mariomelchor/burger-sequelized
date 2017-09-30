@@ -6,5 +6,12 @@ module.exports = function(sequelize, DataTypes){
       defaultValue: 0,
     }
   });
+
+  Burger.associate = function(models) {
+    Burger.hasOne(models.Customer, {
+      onDelete: "cascade"
+    });
+  };
+
   return Burger;
 }
